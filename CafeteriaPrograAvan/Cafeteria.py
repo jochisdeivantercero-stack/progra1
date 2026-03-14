@@ -1,4 +1,3 @@
-# MÓDULO DE PERSONAS
 class Persona:
     def __init__(self, idPersona, nombre, email):
         self.idPersona = idPersona
@@ -35,7 +34,7 @@ class Empleado(Persona):
     def __init__(self, idPersona, nombre, email, idEmpleado, rol):
         super().__init__(idPersona, nombre, email)
         self.idEmpleado = idEmpleado
-        self.rol = rol # Ejemplo: "BARISTA", "MESERO"
+        self.rol = rol
 
     def actualizarInventario(self, inventario, ingrediente, cantidad):
         if ingrediente in inventario.ingredientes:
@@ -48,7 +47,6 @@ class Empleado(Persona):
         pedido.estado = nuevo_estado
         return f"Pedido {pedido.idPedido} marcado como {nuevo_estado}"
 
-# MÓDULO DE PRODUCTOS
 class ProductoBase:
     def __init__(self, idProducto, nombre, precioBase):
         self.idProducto = idProducto
@@ -75,11 +73,10 @@ class Postre(ProductoBase):
         self.esVegano = esVegano
         self.sinGluten = sinGluten
 
-# LOGÍSTICA Y VENTAS
 class Pedido:
     def __init__(self, idPedido, productos):
         self.idPedido = idPedido
-        self.productos = productos # Lista de objetos ProductoBase
+        self.productos = productos
         self.estado = "PENDIENTE"
         self.total = 0.0
 
@@ -88,12 +85,11 @@ class Pedido:
         return self.total
 
     def validarStock(self, inventario):
-        # Lógica: Verifica si hay al menos un ingrediente registrado
         return len(inventario.ingredientes) > 0
 
 class Inventario:
     def __init__(self):
-        self.ingredientes = {} # Diccionario String: Integer
+        self.ingredientes = {}
 
     def reducirStock(self, ingrediente, cantidad):
         if ingrediente in self.ingredientes and self.ingredientes[ingrediente] >= cantidad:
